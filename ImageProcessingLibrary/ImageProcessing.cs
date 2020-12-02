@@ -4,6 +4,6 @@ namespace ImageProcessingLibrary
 {
     public class ImageProcessing
     {
-        
+
     }
 }
