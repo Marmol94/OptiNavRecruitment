@@ -5,9 +5,9 @@ namespace ImageProcessingLibrary
 {
     public class ExtensionIdentifier
     {
-        public Enum Identify(Stream fileStream)
+        public static Enum Identify(byte[] image)
         {
-            return null;
+            
         }
     }
     public enum Extensions
