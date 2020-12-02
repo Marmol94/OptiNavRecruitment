@@ -22,3 +22,9 @@
 
 ## Research
 - https://devblogs.microsoft.com/dotnet/net-core-image-processing/ - do zainspirowania się
+
+## Propozycja rozwiązania
+
+1. Wczytać strumień z zawartością obrazka źródłowego, przekazać przez klasę `Image` do metody `ToMainColors(Async)`
+2. Stworzyć sobie lokalnie stream z kopią oryginalnego,
+3.  Zidentyfikować typ pliku poprzez rozszerzenie i mime-types i [magic-numbers](https://en.wikipedia.org/wiki/List_of_file_signatures)
