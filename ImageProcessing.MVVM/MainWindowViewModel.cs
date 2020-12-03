@@ -44,8 +44,6 @@ namespace ImageProcessing.MVVM
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ICommand LoadFile { get; }
-
         public string SelectedImagePath
         {
             get => _selectedImagePath;
@@ -55,15 +53,6 @@ namespace ImageProcessing.MVVM
                 _selectedImagePath = value;
                 OnPropertyChanged();
             }
-        }
-
-        public MainWindowViewModel()
-        {
-            LoadFile = new RelayCommand(_ =>
-            {
-                var dialog = new OpenFileDialog {Filter = "Image Files(*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG"};
-                if (dialog.ShowDialog() == true) SelectedImagePath = dialog.FileName;
-            }, _=>true );
         }
     }
 }
