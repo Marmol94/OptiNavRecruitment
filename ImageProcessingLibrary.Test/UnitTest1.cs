@@ -23,21 +23,21 @@ namespace ImageProcessingLibrary.Test
         {
             var jpg = File.ReadAllBytes("Szreki/Shrek.jpg");
             var result = ExtensionIdentifier.Identify(jpg);
-            Assert.AreEqual(result, Extensions.Jpg);
+            Assert.AreEqual(Extensions.Jpg, result);
         }
         [Test]
         public void IsBmp()
         {
             var bmp = File.ReadAllBytes("Szreki/Shrek.bmp");
             var result = ExtensionIdentifier.Identify(bmp);
-            Assert.AreEqual(result, Extensions.Bmp);
+            Assert.AreEqual(Extensions.Bmp, result);
         }
         [Test]
         public void IsUnknown()
         {
             var unknown = new byte[] {0x00, 0x00, 0x00, 0x00};
             var result = ExtensionIdentifier.Identify(unknown);
-            Assert.AreEqual(result, Extensions.Unknown);
+            Assert.AreEqual(Extensions.Unknown, result);
         }
     }
 }
