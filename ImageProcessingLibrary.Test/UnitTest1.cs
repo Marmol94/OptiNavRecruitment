@@ -39,5 +39,13 @@ namespace ImageProcessingLibrary.Test
             var result = ExtensionIdentifier.Identify(unknown);
             Assert.AreEqual(Extensions.Unknown, result);
         }
+        [Test]
+        public void TestToMainColors()
+        {
+            var imageProcessor = new ImageProcessing();
+            var image=imageProcessor.ReadFile("Szreki/shrek.jpg");
+            imageProcessor.SaveFile("Szreki/PrzetworzonySzrek.jpg", imageProcessor.ToMainColors(image));
+            Assert.Pass();
+        }
     }
 }
