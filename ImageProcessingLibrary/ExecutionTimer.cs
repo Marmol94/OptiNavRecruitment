@@ -15,19 +15,25 @@ namespace ImageProcessingLibrary
             Duration = duration;
         }
     }
-    public static class Timer{
-        
-        
-        public static ExecutionTime<T> Measure<T>(Func<T> functionToMeasure) {
+
+    public static class Timer
+    {
+        public static ExecutionTime<T> Measure<T>(Func<T> functionToMeasure)
+        {
             var stopwatch = Stopwatch.StartNew();
             var result = functionToMeasure();
             stopwatch.Stop();
             return new ExecutionTime<T>(result, stopwatch.Elapsed);
         }
 
-        public static ExecutionTime<T> MeasureAsync<T>(Task<T> functionToMeasure)
+        public static Task<ExecutionTime<T>> MeasureAsync<T>(Task<T> functionToMeasure)
         {
-            
+            var stopwatch = Stopwatch.StartNew();
+            return functionToMeasure.ContinueWith(task =>
+            {
+                stopwatch.Stop();
+                return new ExecutionTime<T>(task.Result, stopwatch.Elapsed);
+            });
         }
     }
 }
