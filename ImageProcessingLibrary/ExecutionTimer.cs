@@ -6,8 +6,8 @@ namespace ImageProcessingLibrary
 {
     public class ExecutionTime<T>
     {
-        public T Result { get; }
-        public TimeSpan Duration { get; }
+        private T Result { get; }
+        private TimeSpan Duration { get; }
 
         public ExecutionTime(T result, TimeSpan duration)
         {
