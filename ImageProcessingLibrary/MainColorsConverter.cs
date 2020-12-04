@@ -23,6 +23,7 @@ namespace ImageProcessingLibrary
                     }
                     else if (pixel.B > pixel.R && pixel.B > pixel.G)
                     {
+                        var color = new Color();
                         convertedBitmap.SetPixel(j,i, Color.Blue);
                     }
                 }

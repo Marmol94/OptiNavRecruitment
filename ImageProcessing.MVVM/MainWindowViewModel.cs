@@ -1,7 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 
@@ -36,6 +39,7 @@ namespace ImageProcessing.MVVM
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private string _selectedImagePath;
+        private string _savedImagePath;
         public event PropertyChangedEventHandler? PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -54,5 +58,17 @@ namespace ImageProcessing.MVVM
                 OnPropertyChanged();
             }
         }
+
+        public string SavedImagePath
+        {
+            get => _savedImagePath;
+            set
+            {
+                if (value == _savedImagePath) return;
+                _savedImagePath = value;
+                OnPropertyChanged();
+            }
+        }
+       
     }
 }
