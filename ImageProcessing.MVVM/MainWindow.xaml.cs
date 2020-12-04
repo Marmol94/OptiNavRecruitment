@@ -31,10 +31,8 @@ namespace ImageProcessing.MVVM
         // }
         private void SaveButtonClick(object sender, RoutedEventArgs e)
         {
-            var imageService = new ImageProcessingService();
-            var dialog = new SaveFileDialog {Filter = "PNG File(*.PNG)|*.PNG|JPG File(*.JPG)|*.JPG|BMP File(*.BMP)|*.BMP",};
-            if (dialog.ShowDialog() != true) return;
-            File.WriteAllBytes(dialog.FileName, imageService.ConvertToStream(ConvertedImage.Source).ToArray());
+            
+           
         }
     }
 }

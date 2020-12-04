@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Windows.Media;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 
@@ -36,7 +37,8 @@ namespace ImageProcessing.MVVM
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private string? _loadedImagePath;
-        private string? _savedImagePath;
+        private ImageSource _convertedImage;
+        private ImageSource? _convertedImage1;
         public event PropertyChangedEventHandler? PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -48,9 +50,23 @@ namespace ImageProcessing.MVVM
         public MainWindowViewModel()
         {
             LoadFileCommand = new RelayCommand(_ => ExecuteLoadFile(), o => true);
+            SaveFileCommand = new RelayCommand(_=>ExecuteSaveFile(), o=> true);
+            ConvertCommand = new RelayCommand(_=>ExecuteConvert(), o=> true);
+            service = new ImageProcessingService();
         }
 
         public Stream? LoadedImage { get; set; }
+
+        public ImageSource? ConvertedImage
+        {
+            get => _convertedImage1;
+            set
+            {
+                if (Equals(value, _convertedImage1)) return;
+                _convertedImage1 = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string? LoadedImagePath
         {
@@ -63,19 +79,19 @@ namespace ImageProcessing.MVVM
             }
         }
 
-        public string SavedImagePath
-        {
-            get => _savedImagePath;
-            set
-            {
-                if (value == _savedImagePath) return;
-                _savedImagePath = value;
-                OnPropertyChanged();
-            }
-        }
-
         public ICommand LoadFileCommand { get; }
+        public ICommand SaveFileCommand { get; }
+        public ICommand ConvertCommand { get; }
+        public ImageProcessingService service { get; }
 
+        private void ExecuteSaveFile()
+        {
+            var imageService = new ImageProcessingService();
+            var dialog = new SaveFileDialog {Filter = "PNG File(*.PNG)|*.PNG|JPG File(*.JPG)|*.JPG|BMP File(*.BMP)|*.BMP",};
+            if (dialog.ShowDialog() != true) return;
+            File.WriteAllBytes(dialog.FileName, imageService.ConvertToStream(ConvertedImage).ToArray());
+
+        }
         private void ExecuteLoadFile()
         {
             var dialog = new OpenFileDialog {Filter = "Image Files(*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG"};
@@ -85,5 +101,13 @@ namespace ImageProcessing.MVVM
                 LoadedImage = File.OpenRead(LoadedImagePath);
             }
         }
+
+        private void ExecuteConvert()
+        {
+            var wpfImage = service.ConvertGdiToWpf(System.Drawing.Image.FromStream(LoadedImage));
+            ConvertedImage = service.ConvertToMainColors(wpfImage);
+            
+        }
+        
     }
 }

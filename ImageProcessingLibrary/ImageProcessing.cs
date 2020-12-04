@@ -14,7 +14,6 @@ namespace ImageProcessingLibrary
         {
             var imageConverter = new MainColorsConverter();
             return  imageConverter.ToMainColorsConverter(imageToConvert);
-            
         }
 
         public void SaveFile(string savePath, Image image)

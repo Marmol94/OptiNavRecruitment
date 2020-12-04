@@ -6,10 +6,10 @@ namespace ImageProcessing.MVVM
 {
     public class ImageProcessingService
     {
-        public System.Drawing.Image ImageWpfToGDI(System.Windows.Media.ImageSource image) {
+        public System.Drawing.Image ImageWpfToGDI(ImageSource image) {
             MemoryStream ms = new MemoryStream();
-            var encoder = new System.Windows.Media.Imaging.PngBitmapEncoder();
-            encoder.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(image as System.Windows.Media.Imaging.BitmapSource));
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(image as BitmapSource));
             encoder.Save(ms);
             ms.Flush();      
             return System.Drawing.Image.FromStream(ms);
@@ -18,7 +18,7 @@ namespace ImageProcessing.MVVM
         {
             var processor = new ImageProcessingLibrary.ImageProcessing();
             var imageToMainColors = processor.ToMainColors(ImageWpfToGDI(imageC));
-            imageC = ConvertImage(imageToMainColors);
+            imageC = ConvertGdiToWpf(imageToMainColors);
             return imageC;
         }
 
@@ -31,13 +31,13 @@ namespace ImageProcessing.MVVM
             return memStream;
         }
         
-        public  System.Windows.Media.ImageSource ConvertImage(System.Drawing.Image image)
+        public  ImageSource ConvertGdiToWpf(System.Drawing.Image image)
         {
-            var bitmap = new System.Windows.Media.Imaging.BitmapImage();
+            var bitmap = new BitmapImage();
             bitmap.BeginInit();
-            System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
+            MemoryStream memoryStream = new MemoryStream();
             image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
-            memoryStream.Seek(0, System.IO.SeekOrigin.Begin);
+            memoryStream.Seek(0, SeekOrigin.Begin);
             bitmap.StreamSource = memoryStream;
             bitmap.EndInit();
             return bitmap;
