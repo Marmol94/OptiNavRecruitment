@@ -16,7 +16,7 @@ namespace ImageProcessingLibrary
         }
     }
 
-    public static class Timer
+    public static class MethodTimer
     {
         public static TimedExecution<T> Measure<T>(Func<T> functionToMeasure)
         {
