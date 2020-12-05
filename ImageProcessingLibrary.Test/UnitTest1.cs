@@ -23,7 +23,7 @@ namespace ImageProcessingLibrary.Test
         {
             var imageProcessor = new ImageProcessing();
             var image=imageProcessor.ReadFile("Szreki/shrek.bmp");
-            var converted = MethodTimer.Measure(() => imageProcessor.ToMainColors(image));
+            var converted = Timer.Measure(() => imageProcessor.ToMainColors(image));
             Assert.Pass();
         }
     }
