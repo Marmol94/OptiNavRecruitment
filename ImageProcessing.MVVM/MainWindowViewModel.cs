@@ -37,8 +37,9 @@ namespace ImageProcessing.MVVM
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private string? _loadedImagePath;
-        private ImageSource _convertedImage;
-        private ImageSource? _convertedImage1;
+        private ImageSource? _convertedImage;
+        private readonly ImageProcessingService _service;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -47,23 +48,23 @@ namespace ImageProcessing.MVVM
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(ImageProcessingService service)
         {
             LoadFileCommand = new RelayCommand(_ => ExecuteLoadFile(), o => true);
-            SaveFileCommand = new RelayCommand(_=>ExecuteSaveFile(), o=> true);
-            ConvertCommand = new RelayCommand(_=>ExecuteConvert(), o=> true);
-            service = new ImageProcessingService();
+            SaveFileCommand = new RelayCommand(_=> ExecuteSaveFile(), o=> true);
+            ConvertCommand = new RelayCommand(_=> ExecuteConvert(), o=> true);
+            _service = service;
         }
 
         public Stream? LoadedImage { get; set; }
 
         public ImageSource? ConvertedImage
         {
-            get => _convertedImage1;
+            get => _convertedImage;
             set
             {
-                if (Equals(value, _convertedImage1)) return;
-                _convertedImage1 = value;
+                if (Equals(value, _convertedImage)) return;
+                _convertedImage = value;
                 OnPropertyChanged();
             }
         }
@@ -82,7 +83,6 @@ namespace ImageProcessing.MVVM
         public ICommand LoadFileCommand { get; }
         public ICommand SaveFileCommand { get; }
         public ICommand ConvertCommand { get; }
-        public ImageProcessingService service { get; }
 
         private void ExecuteSaveFile()
         {
@@ -104,9 +104,8 @@ namespace ImageProcessing.MVVM
 
         private void ExecuteConvert()
         {
-            var wpfImage = service.ConvertGdiToWpf(System.Drawing.Image.FromStream(LoadedImage));
-            ConvertedImage = service.ConvertToMainColors(wpfImage);
-            
+            var wpfImage = _service.ConvertGdiToWpf(System.Drawing.Image.FromStream(LoadedImage));
+            ConvertedImage = _service.ConvertToMainColors(wpfImage);
         }
         
     }
