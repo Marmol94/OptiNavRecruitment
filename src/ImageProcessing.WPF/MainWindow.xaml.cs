@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing.MVVM
+﻿namespace ImageProcessing.WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -8,9 +8,7 @@
         public MainWindow()
         {
             InitializeComponent();
-
-
-            DataContext = new MainWindowViewModel(new ImageProcessingLibrary.ImageProcessing());
+            DataContext = new MainWindowViewModel(new Library.ImageProcessing());
         }
     }
 }

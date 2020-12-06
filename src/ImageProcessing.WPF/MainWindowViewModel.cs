@@ -4,15 +4,15 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using ImageProcessingLibrary;
+using ImageProcessing.Library;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 
-namespace ImageProcessing.MVVM
+namespace ImageProcessing.WPF
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public MainWindowViewModel(ImageProcessingLibrary.ImageProcessing imageProcessingService)
+        public MainWindowViewModel(Library.ImageProcessing imageProcessingService)
         {
             _imageProcessingService = imageProcessingService;
             LoadFileCommand = new RelayCommand(_ => ExecuteLoadFile());
@@ -83,7 +83,7 @@ namespace ImageProcessing.MVVM
 
         private void ExecuteConvert()
         {
-            var image = new BinaryGraphic(LoadedImage);
+            var image = new Image(LoadedImage);
             var timedConversion = Timer.Measure(() => _imageProcessingService.ToMainColors(image));
             ConversionDuration = timedConversion.Duration;
             ConvertedImage = timedConversion.Result.Value;
@@ -91,23 +91,21 @@ namespace ImageProcessing.MVVM
 
         private async Task ExecuteConvertAsync()
         {
-            var image = new BinaryGraphic(LoadedImage);
+            var image = new Image(LoadedImage);
             var timedConversion = await Timer.MeasureAsync(_imageProcessingService.ToMainColorsAsync(image));
             ConversionDuration = timedConversion.Duration;
             ConvertedImage = timedConversion.Result.Value;
         }
-
+        
         #region PropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        private readonly ImageProcessingLibrary.ImageProcessing _imageProcessingService;
+        
+        private readonly Library.ImageProcessing _imageProcessingService;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) 
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         #endregion
     }

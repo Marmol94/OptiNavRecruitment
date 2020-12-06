@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace ImageProcessingLibrary
+namespace ImageProcessing.Library
 {
     public class Timed<T>
     {

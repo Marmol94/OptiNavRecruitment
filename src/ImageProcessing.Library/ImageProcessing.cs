@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
-namespace ImageProcessingLibrary
+namespace ImageProcessing.Library
 {
-    public class MainColorsConverter : IMainColorsConverter
+    public static class BitmapTransformer
     {
-        public Bitmap ToMainColorsConverter(Bitmap source)
+        public static Bitmap BoostMainColors(Bitmap source)
         {
             var result = new Bitmap(source.Width, source.Height);
 
@@ -32,6 +34,27 @@ namespace ImageProcessingLibrary
             Marshal.Copy(buffer, 0, resultData.Scan0, buffer.Length);
             result.UnlockBits(resultData);
             return result;
+        }
+    }
+
+    public class ImageProcessing
+    {
+        public async Task<Image> ToMainColorsAsync(Image imageToConvert)
+        {
+            var resultStream = new MemoryStream();
+            var sourceBitmap = new Bitmap(imageToConvert.Value);
+            var resultBitmap = await Task.Run(() => BitmapTransformer.BoostMainColors(new Bitmap(imageToConvert.Value)));
+            resultBitmap.Save(resultStream, sourceBitmap.RawFormat);
+            return new Image(resultStream);
+        }
+
+        public Image ToMainColors(Image imageToConvert)
+        {
+            var resultStream = new MemoryStream();
+            var sourceBitmap = new Bitmap(imageToConvert.Value);
+            var resultBitmap = BitmapTransformer.BoostMainColors(sourceBitmap);
+            resultBitmap.Save(resultStream, sourceBitmap.RawFormat);
+            return new Image(resultStream);
         }
     }
 }

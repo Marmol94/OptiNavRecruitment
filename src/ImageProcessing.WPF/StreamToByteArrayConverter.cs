@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace ImageProcessing.MVVM
+namespace ImageProcessing.WPF
 {
     public class StreamToByteArrayConverter : MarkupExtension, IValueConverter
     {

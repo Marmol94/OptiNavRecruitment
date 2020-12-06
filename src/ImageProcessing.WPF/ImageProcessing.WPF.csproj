@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ImageProcessingLibrary\ImageProcessingLibrary.csproj" />
+      <ProjectReference Include="..\ImageProcessing.Library\ImageProcessing.Library.csproj" />
     </ItemGroup>
 
 </Project>

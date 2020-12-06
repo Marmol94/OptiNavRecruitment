@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ImageProcessing.MVVM
+namespace ImageProcessing.WPF
 {
     public class RelayCommand : ICommand
     {
