@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.Library", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.Library.Test", "ImageProcessing.Library.Test\ImageProcessing.Library.Test.csproj", "{F00BB46C-1AA5-42EA-905F-1E4DE752639A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.MVVM", "ImageProcessing.MVVM\ImageProcessing.MVVM.csproj", "{BF02283D-A202-4D2C-8051-2079C8BCE758}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing.WPF", "ImageProcessing.WPF\ImageProcessing.WPF.csproj", "{BF02283D-A202-4D2C-8051-2079C8BCE758}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{26F7A712-0260-47BE-9B3D-8CFEECC1C713}"
 ProjectSection(SolutionItems) = preProject

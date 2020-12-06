@@ -8,7 +8,7 @@ using ImageProcessing.Library;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 
-namespace ImageProcessing.MVVM
+namespace ImageProcessing.WPF
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {

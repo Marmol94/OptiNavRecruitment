@@ -1,4 +1,4 @@
-﻿namespace ImageProcessing.MVVM
+﻿namespace ImageProcessing.WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
