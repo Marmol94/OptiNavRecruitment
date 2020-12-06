@@ -6,11 +6,11 @@ namespace ImageProcessingLibrary
 {
     public class ImageProcessing
     {
-        public Image ReadFile(string readPath)
+        public Bitmap ReadFile(string readPath)
         {
-            return Bitmap.FromFile(readPath);
+            return new Bitmap(readPath);
         }
-        public Bitmap ToMainColors(Image imageToConvert)
+        public Bitmap ToMainColors(Bitmap imageToConvert)
         {
             var imageConverter = new MainColorsConverter();
             return  imageConverter.ToMainColorsConverter(imageToConvert);

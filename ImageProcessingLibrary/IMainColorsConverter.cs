@@ -6,6 +6,6 @@ namespace ImageProcessingLibrary
 {
     public interface IMainColorsConverter
     {
-        Bitmap ToMainColorsConverter(Image imageToConvert);
+        Bitmap ToMainColorsConverter(Bitmap source);
     }
 }

@@ -1,33 +1,37 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace ImageProcessingLibrary
 {
     public class MainColorsConverter : IMainColorsConverter
     {
-        public Bitmap ToMainColorsConverter(Image bitmapToConvert)
+        public Bitmap ToMainColorsConverter(Bitmap source)
         {
-            var convertedBitmap = new Bitmap(bitmapToConvert);
-            var pixel = new Color();
-            for (var i = 0; i < convertedBitmap.Height; i++)
+            var result = new Bitmap(source.Width, source.Height);
+
+            var sourceData = source.LockBits(new Rectangle(0, 0, source.Width, source.Height),
+                ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+            var resultData = result.LockBits(new Rectangle(0, 0, result.Width, result.Height),
+                ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            var buffer = new byte[resultData.Stride * result.Height];
+            Marshal.Copy(sourceData.Scan0, buffer, 0, buffer.Length);
+            source.UnlockBits(sourceData);
+            for (var i = 0; i < buffer.Length; i += 4)
             {
-                for (var j = 0; j < convertedBitmap.Width; j++)
-                {
-                    pixel = convertedBitmap.GetPixel(j, i);
-                    if (pixel.R > pixel.G && pixel.R > pixel.B)
-                    {
-                        convertedBitmap.SetPixel(j, i, Color.Red);
-                    }
-                    else if (pixel.G > pixel.R && pixel.G > pixel.B)
-                    {
-                        convertedBitmap.SetPixel(j,i,Color.Green);
-                    }
-                    else if (pixel.B > pixel.R && pixel.B > pixel.G)
-                    {
-                        convertedBitmap.SetPixel(j,i, Color.Blue);
-                    }
-                }
+                var indexOfDominant = Array.IndexOf(buffer,
+                    Math.Max(buffer[i], Math.Max(buffer[i + 1], buffer[i + 2])), i, 3);
+                Array.Copy(buffer, i, buffer, i, 4);
+                buffer[i] = 0;
+                buffer[i + 1] = 0;
+                buffer[i + 2] = 0;
+                buffer[indexOfDominant] = byte.MaxValue;
             }
-            return convertedBitmap;
+
+            Marshal.Copy(buffer, 0, resultData.Scan0, buffer.Length);
+            result.UnlockBits(resultData);
+            return result;
         }
     }
 }
