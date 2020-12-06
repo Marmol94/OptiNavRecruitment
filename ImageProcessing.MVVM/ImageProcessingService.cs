@@ -16,9 +16,9 @@ namespace ImageProcessing.MVVM
         }
         public ImageSource ConvertToMainColors(ImageSource imageC)
         {
-            var processor = new ImageProcessingLibrary.ImageProcessing();
-            var imageToMainColors = processor.ToMainColors(ImageWpfToGDI(imageC));
-            imageC = ConvertGdiToWpf(imageToMainColors);
+            var processor = new Library.ImageProcessing();
+            // var imageToMainColors = processor.ToMainColors(ImageWpfToGDI(imageC));
+            // imageC = ConvertGdiToWpf(imageToMainColors);
             return imageC;
         }
 

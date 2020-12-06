@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Xml.Schema;
 
-namespace ImageProcessingLibrary
+namespace ImageProcessing.Library
 {
     public interface IMainColorsConverter
     {

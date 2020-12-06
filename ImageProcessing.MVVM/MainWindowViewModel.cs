@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using ImageProcessingLibrary;
+using ImageProcessing.Library;
 using JetBrains.Annotations;
 using Microsoft.Win32;
 
@@ -12,7 +12,7 @@ namespace ImageProcessing.MVVM
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public MainWindowViewModel(ImageProcessingLibrary.ImageProcessing imageProcessingService)
+        public MainWindowViewModel(Library.ImageProcessing imageProcessingService)
         {
             _imageProcessingService = imageProcessingService;
             LoadFileCommand = new RelayCommand(_ => ExecuteLoadFile());
@@ -96,12 +96,12 @@ namespace ImageProcessing.MVVM
             ConversionDuration = timedConversion.Duration;
             ConvertedImage = timedConversion.Result.Value;
         }
-
+        
         #region PropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        private readonly ImageProcessingLibrary.ImageProcessing _imageProcessingService;
+        
+        private readonly Library.ImageProcessing _imageProcessingService;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

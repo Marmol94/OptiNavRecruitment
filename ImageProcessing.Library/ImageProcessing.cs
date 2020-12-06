@@ -5,9 +5,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace ImageProcessingLibrary
+namespace ImageProcessing.Library
 {
-    public class BitmapTransformer
+    public static class BitmapTransformer
     {
         public static Bitmap BoostMainColors(Bitmap source)
         {

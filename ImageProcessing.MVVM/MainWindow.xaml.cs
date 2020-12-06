@@ -10,7 +10,7 @@
             InitializeComponent();
 
 
-            DataContext = new MainWindowViewModel(new ImageProcessingLibrary.ImageProcessing());
+            DataContext = new MainWindowViewModel(new Library.ImageProcessing());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace ImageProcessingLibrary
+namespace ImageProcessing.Library
 {
     public class BinaryGraphic
     {
