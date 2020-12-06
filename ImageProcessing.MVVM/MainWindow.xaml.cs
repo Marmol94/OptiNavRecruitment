@@ -8,8 +8,6 @@
         public MainWindow()
         {
             InitializeComponent();
-
-
             DataContext = new MainWindowViewModel(new Library.ImageProcessing());
         }
     }
