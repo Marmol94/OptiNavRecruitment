@@ -83,7 +83,7 @@ namespace ImageProcessing.MVVM
 
         private void ExecuteConvert()
         {
-            var image = new BinaryGraphic(LoadedImage);
+            var image = new Image(LoadedImage);
             var timedConversion = Timer.Measure(() => _imageProcessingService.ToMainColors(image));
             ConversionDuration = timedConversion.Duration;
             ConvertedImage = timedConversion.Result.Value;
@@ -91,7 +91,7 @@ namespace ImageProcessing.MVVM
 
         private async Task ExecuteConvertAsync()
         {
-            var image = new BinaryGraphic(LoadedImage);
+            var image = new Image(LoadedImage);
             var timedConversion = await Timer.MeasureAsync(_imageProcessingService.ToMainColorsAsync(image));
             ConversionDuration = timedConversion.Duration;
             ConvertedImage = timedConversion.Result.Value;

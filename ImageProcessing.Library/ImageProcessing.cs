@@ -39,22 +39,22 @@ namespace ImageProcessing.Library
 
     public class ImageProcessing
     {
-        public async Task<BinaryGraphic> ToMainColorsAsync(BinaryGraphic imageToConvert)
+        public async Task<Image> ToMainColorsAsync(Image imageToConvert)
         {
             var resultStream = new MemoryStream();
             var sourceBitmap = new Bitmap(imageToConvert.Value);
             var resultBitmap = await Task.Run(() => BitmapTransformer.BoostMainColors(new Bitmap(imageToConvert.Value)));
             resultBitmap.Save(resultStream, sourceBitmap.RawFormat);
-            return new BinaryGraphic(resultStream);
+            return new Image(resultStream);
         }
 
-        public BinaryGraphic ToMainColors(BinaryGraphic imageToConvert)
+        public Image ToMainColors(Image imageToConvert)
         {
             var resultStream = new MemoryStream();
             var sourceBitmap = new Bitmap(imageToConvert.Value);
             var resultBitmap = BitmapTransformer.BoostMainColors(sourceBitmap);
             resultBitmap.Save(resultStream, sourceBitmap.RawFormat);
-            return new BinaryGraphic(resultStream);
+            return new Image(resultStream);
         }
     }
 }

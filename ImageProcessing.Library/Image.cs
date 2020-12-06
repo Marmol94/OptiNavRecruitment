@@ -2,9 +2,9 @@
 
 namespace ImageProcessing.Library
 {
-    public class BinaryGraphic
+    public class Image
     {
-        public BinaryGraphic(Stream value) => Value = value;
+        public Image(Stream value) => Value = value;
 
         public Stream Value { get; }
     }
