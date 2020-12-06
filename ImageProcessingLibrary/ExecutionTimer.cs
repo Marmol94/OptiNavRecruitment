@@ -6,8 +6,8 @@ namespace ImageProcessingLibrary
 {
     public class TimedExecution<T>
     {
-        private T Result { get; }
-        private TimeSpan Duration { get; }
+        public  T Result { get; }
+        public TimeSpan Duration { get; }
 
         public TimedExecution(T result, TimeSpan duration)
         {
