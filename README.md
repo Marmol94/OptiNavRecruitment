@@ -1,4 +1,4 @@
-# Regrutacja
+# OptiNav Recruitment Task
 
 
 ## Wymagania na projekt:
@@ -19,19 +19,3 @@
    - wypisze czas przetwarzania obrazka na nowe kolory.
    - UWAGA: W przypadku trudności z modelem MVVM można stworzyć aplikację w Windows Forms (mniej punktowane).
 3. Napisać przykładowe testy jednostkowe dla ViewModelu aplikacji z punktu 2. oraz biblioteki z punktu 1.
-
-## Research
-- https://devblogs.microsoft.com/dotnet/net-core-image-processing/ - do zainspirowania się
-
-## Propozycja rozwiązania
-
-1. Wczytać strumień z zawartością obrazka źródłowego, przekazać przez klasę `Image` do metody `ToMainColors(Async)`
-2. Stworzyć sobie lokalnie stream z kopią oryginalnego,
-3.  Zidentyfikować typ pliku poprzez rozszerzenie i mime-types i [magic-numbers](https://en.wikipedia.org/wiki/List_of_file_signatures)
-
-## TODO
-
-1. Testy jednostkowe
-2. ToMainColors Async (Drugi przycisk Convert Async)
-3. Wyswietlanie Timera w okienku
-4. Kodowanie zależnie od rozszerzenia
