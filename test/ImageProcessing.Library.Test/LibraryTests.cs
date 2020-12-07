@@ -76,7 +76,7 @@ namespace ImageProcessingLibraryTest
         [TestCase (10,111120)]
         [TestCase (1123123,1)]
         [TestCase (12313,12331)]
-        public async Task BoostMainColorsSmokeTestAsync(int height, int width)
+        public void BoostMainColorsSmokeTestAsync(int height, int width)
         {
             var testBitmap = CreateBitmap(1, 1, 1, height, width);
             testBitmap.Save(_memoryStream,ImageFormat.Bmp);
