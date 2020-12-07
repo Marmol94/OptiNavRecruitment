@@ -72,6 +72,7 @@ namespace ImageProcessing.WPF
             var dialog = new SaveFileDialog {Filter = "PNG File(*.PNG)|*.PNG|JPG File(*.JPG)|*.JPG|BMP File(*.BMP)|*.BMP",};
             if (dialog.ShowDialog() != true) return;
             using var fileToWrite = File.OpenWrite(dialog.FileName);
+            ConvertedImage?.Seek(0, SeekOrigin.Begin);
             ConvertedImage?.CopyTo(fileToWrite);
         }
 
